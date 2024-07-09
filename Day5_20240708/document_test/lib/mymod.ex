@@ -2,10 +2,31 @@ defmodule Mymod do
   @moduledoc """
   Add one to an integer and String number
   """
+
+  @doc """
+  my_func(n) : Add one to an integer number.
+
+    ## Example
+
+    ```
+    iex> Mymod.my_func(3)
+    4
+    ```
+  """
   def my_func(n) when is_integer(n) do
     n + 1
   end
 
+  @doc """
+  my_funcs(str) : Add one to an String number
+
+    ## Example
+    ```
+    iex> Mymod.my_funcs("100")
+    101
+
+    ```
+  """
   def my_funcs(str) when is_binary(str) do
     # StringをIntegerに変換する
     case Integer.parse(str) do
