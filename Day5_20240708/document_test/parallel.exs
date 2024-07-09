@@ -6,11 +6,12 @@ defmodule Parallel do
     |> Enum.map(fn elem ->
       spawn_link(fn -> send(me, {self(), fun.(elem)}) end)
     end)
+    |> IO.inspect()
     |> Enum.map(fn pid ->
-      :timer.sleep(round(:rand.uniform() * 50))
+      :timer.sleep(round(:rand.uniform() * 5000))
 
       receive do
-        {^pid, result} -> result
+        {pid, result} -> result
       end
     end)
   end
