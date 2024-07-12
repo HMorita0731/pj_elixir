@@ -5,6 +5,7 @@ defmodule Example.User do
     field :first_name, :string
     field :last_name, :string
     field :age, :integer
+    field :email, :string
 
     timestamps()
   end

@@ -12,7 +12,8 @@ Enum.each(users,fn {last_name, first_name, age} ->
     %User{
       first_name: first_name,
       last_name: last_name,
-      age: age
+      age: age,
+      email: first_name <> "@example.com"
     }
 
     Repo.insert!(user)

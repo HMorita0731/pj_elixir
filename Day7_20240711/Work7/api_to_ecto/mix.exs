@@ -26,7 +26,8 @@ defmodule ApiToEcto.MixProject do
       {:ecto_sql, "~> 3.11"},
       {:postgrex, "~> 0.18.0"},
       {:jason, "~> 1.4"},
-      {:httpoison, "~> 2.2"}
+      {:httpoison, "~> 2.2"},
+      {:csv, "~> 3.2"}
     ]
   end
 
