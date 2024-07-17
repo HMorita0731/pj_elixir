@@ -44,4 +44,11 @@ def question13(path1, path2) do
   Enum.map(fn x -> Tuple_to_list(x) end) #ここで今日は一旦終了
 end
 
+def myquestion13(path1\\"col1.txt",path2\\"col2.txt") do
+  txt_list1 = txt_list(path1)
+  txt_list2 = txt_list(path2)
+  zip_list = Enum.zip(txt_list1, txt_list2)
+  Enum.map(fn x -> Enum.join(Tuple_to_list(x),"\t") end)
+end
+
 end
