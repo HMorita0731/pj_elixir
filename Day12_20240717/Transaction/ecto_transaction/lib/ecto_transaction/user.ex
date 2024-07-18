@@ -7,6 +7,7 @@ defmodule EctoTransaction.User do
     field :email, :string
     has_one :point, EctoTransaction.Point
     has_many :point_logs, EctoTransaction.PointLog
+    many_to_many :items, EctoTransaction.Item, join_through: "get_items"
   end
 
   def changeset(user,params) do

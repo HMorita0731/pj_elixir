@@ -1,4 +1,4 @@
-defmodule EctoTransaction.Repo.Migrations.CreateUsers do
+defmodule EctoAssocQuery.Repo.Migrations.CreateUsers do
   use Ecto.Migration
 
   def change do
@@ -7,5 +7,6 @@ defmodule EctoTransaction.Repo.Migrations.CreateUsers do
       add :email, :string, null: false
     end
 
+    create unique_index(:users, :email)
   end
 end
