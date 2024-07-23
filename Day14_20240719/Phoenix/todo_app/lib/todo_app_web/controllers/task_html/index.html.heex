@@ -1,0 +1,17 @@
+<.header>
+  Todo List
+  <:subtitle>
+    It shows tasks that have not yet been completed.
+  </:subtitle>
+  <:actions>
+  <.link href={~p"/tasks/new"}>
+  <.button>New Task</.button>
+  </.link>
+  </:actions>
+</.header>
+
+<.table id="tasks" rows={@tasks}>
+  <:col :let={task} label="Title"><%= task.title %></:col>
+  
+  <:col :let={task} label="Date"><%= task.date %></:col>
+</.table>
