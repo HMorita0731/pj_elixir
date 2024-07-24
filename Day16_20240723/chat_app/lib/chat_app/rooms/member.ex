@@ -6,7 +6,6 @@ defmodule ChatApp.Rooms.Member do
   alias ChatApp.Rooms.Room
 
   schema "members" do
-
     belongs_to(:user, User)
     belongs_to(:room, Room)
 

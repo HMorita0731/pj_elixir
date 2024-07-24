@@ -64,9 +64,8 @@ defmodule ChatAppWeb.RoomLive.FormComponent do
   end
 
   defp save_room(socket, :new, room_params) do
-    case Rooms.create_room(room_params,socket.assigns.current_user.id) do
+    case Rooms.create_room(room_params, socket.assigns.current_user.id) do
       {:ok, %{room: room}} ->
-
         {:noreply,
          socket
          |> put_flash(:info, "Room created successfully")

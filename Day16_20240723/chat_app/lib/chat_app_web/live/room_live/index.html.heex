@@ -11,12 +11,16 @@
   id="rooms"
   rows={@streams.rooms}
   row_click={fn {_id, room} -> JS.navigate(~p"/rooms/#{room}") end}
-  >
+>
   <:col :let={{_id, room}} label="Room name"><%= room.room_name %></:col>
   <:action :let={{_id, room}}>
-  <span phx-click="join" phx-value-id={room.id} :if={Enum.all?(room.users,& &1.id != @current_user.id)}>
-  Join
-  </span>
+    <span
+      :if={Enum.all?(room.users, &(&1.id != @current_user.id))}
+      phx-click="join"
+      phx-value-id={room.id}
+    >
+      Join
+    </span>
   </:action>
   <:action :let={{_id, room}}>
     <div class="sr-only">

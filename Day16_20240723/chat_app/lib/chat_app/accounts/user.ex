@@ -13,7 +13,7 @@ defmodule ChatApp.Accounts.User do
 
     timestamps(type: :utc_datetime)
 
-    many_to_many(:rooms,Room,join_through: "members")
+    many_to_many(:rooms, Room, join_through: "members")
   end
 
   @doc """

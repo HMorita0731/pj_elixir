@@ -16,7 +16,7 @@ defmodule ChatApp.Rooms.Message do
   @doc false
   def changeset(message, attrs) do
     message
-    |> cast(attrs, [:message,:user_id,:room_id])
+    |> cast(attrs, [:message, :user_id, :room_id])
     |> validate_required([:message])
   end
 end

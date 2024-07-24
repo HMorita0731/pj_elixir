@@ -8,10 +8,10 @@ defmodule ChatAppWeb.RoomLive.Index do
   @impl true
   def mount(_params, session, socket) do
     user = Accounts.get_user_by_session_token(session["user_token"])
+
     {:ok,
-    stream(socket, :rooms, Rooms.list_rooms())
-    |>assign(:current_user,user)
-    }
+     stream(socket, :rooms, Rooms.list_rooms())
+     |> assign(:current_user, user)}
   end
 
   @impl true
@@ -22,7 +22,7 @@ defmodule ChatAppWeb.RoomLive.Index do
   defp apply_action(socket, :edit, %{"id" => id}) do
     socket
     |> assign(:page_title, "Edit Room")
-    |> assign(:room, Rooms.get_room!(id))
+    |> assign(:room, Rooms.get_room(id, socket.assigns.current_user.id))
   end
 
   defp apply_action(socket, :new, _params) do
@@ -50,13 +50,13 @@ defmodule ChatAppWeb.RoomLive.Index do
     {:noreply, stream_delete(socket, :rooms, room)}
   end
 
-  def handle_event("join",%{"id" => room_id},socket) do
-    Rooms.create_member(socket.assigns.current_user.id,room_id)
+  def handle_event("join", %{"id" => room_id}, socket) do
+    Rooms.create_member(socket.assigns.current_user.id, room_id)
 
-    socket=
-    socket
-    |> put_flash(:info, "join room")
-    |> redirect(to: ~p"/rooms/#{room_id}")
+    socket =
+      socket
+      |> put_flash(:info, "join room")
+      |> redirect(to: ~p"/rooms/#{room_id}")
 
     {:noreply, socket}
   end

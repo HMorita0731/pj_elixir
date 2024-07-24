@@ -8,7 +8,7 @@ defmodule ChatApp.Rooms.Room do
 
     timestamps(type: :utc_datetime)
 
-    many_to_many(:users,User,join_through: "members")
+    many_to_many(:users, User, join_through: "members")
   end
 
   @doc false
