@@ -13,6 +13,9 @@ params = [
     Repo.insert!(%User{
       name: name,
       email: email,
+      introduction: """
+      宇宙人です
+      """,
       hashed_password: Pbkdf2.hash_pwd_salt(password),
       confirmed_at: DateTime.truncate(DateTime.utc_now(), :second)
     })

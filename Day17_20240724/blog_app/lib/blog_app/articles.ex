@@ -24,6 +24,34 @@ defmodule BlogApp.Articles do
     |> Repo.all()
   end
 
+  def list_articles_for_user(user_id, current_user_id)
+      when user_id == current_user_id do
+    Article
+    |> where([a], a.status in [1, 2])
+    |> where([a], a.user_id == ^user_id)
+    |> preload([:user])
+    |> Repo.all()
+  end
+
+  def list_articles_for_user(user_id, _current_user_id) do
+    Article
+    |> where([a], a.status == 1)
+    |> get_articles_for_user_by_query(user_id)
+  end
+
+  def list_draft_articles_for_user(user_id) do
+    Article
+    |> where([a], a.status == 0)
+    |> get_articles_for_user_by_query(user_id)
+  end
+
+  def get_articles_for_user_by_query(query, user_id) do
+    query
+    |> where([a], a.user_id == ^user_id)
+    |> preload([:user])
+    |> Repo.all()
+  end
+
   @doc """
   Gets a single article.
 
@@ -40,7 +68,7 @@ defmodule BlogApp.Articles do
   """
   def get_article!(id) do
     Article
-    |> where([a],a.id == ^id)
+    |> where([a], a.id == ^id)
     |> preload(:user)
     |> Repo.one!()
   end

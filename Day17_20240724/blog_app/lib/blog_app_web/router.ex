@@ -20,10 +20,11 @@ defmodule BlogAppWeb.Router do
   scope "/", BlogAppWeb do
     pipe_through :browser
 
-    #get "/", PageController, :home
+    # get "/", PageController, :home
     live_session :home_authenticated, on_mount: [{BlogAppWeb.UserAuth, :mount_current_user}] do
       live "/", ArticleLive.Summary, :summary
       live "/articles/show/:article_id", ArticleLive.Show, :show
+      live "/users/profile/:user_id", UserPageLive, :info
     end
   end
 
@@ -74,6 +75,7 @@ defmodule BlogAppWeb.Router do
       live "/users/settings/confirm_email/:token", UserSettingsLive, :confirm_email
       live "/articles/new", ArticleLive.Form, :new
       live "/articles/:article_id/edit", ArticleLive.Form, :edit
+      live "/users/profile/:user_id/draft", UserPageLive, :draft
     end
   end
 

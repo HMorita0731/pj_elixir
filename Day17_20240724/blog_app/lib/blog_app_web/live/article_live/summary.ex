@@ -6,27 +6,29 @@ defmodule BlogAppWeb.ArticleLive.Summary do
   def render(assigns) do
     ~H"""
     <.header>
-    Listing Articles
+      Listing Articles
     </.header>
-    <div :for={article <- @articles} class="mt-2">
-    <a>
-    <%= article.user.name %>
-    </a>
-    <.link href={~p"/articles/show/#{article}"}>
-    <div><%= article.submit_date %></div>
-    <h2><%=article.title %></h2>
-    </.link>
-    </div>
 
+    <div :for={article <- @articles} class="mt-2 border-2 rounded-lg py-2 px-4 cursor-pointer">
+      <.link href={~p"/users/profile/#{article.user}"}>
+        <%= article.user.name %>
+      </.link>
+
+      <.link href={~p"/articles/show/#{article}"}>
+        <div class="text-xs text-grey-600"><%= article.submit_date %></div>
+
+        <h2 class="my-2 font-bold text-2xl hover:underline"><%= article.title %></h2>
+      </.link>
+    </div>
     """
   end
 
-  def mount(_params,_session,socket) do
+  def mount(_params, _session, socket) do
     socket =
       socket
-      |> assign(:articles,Articles.list_articles())
+      |> assign(:articles, Articles.list_articles())
       |> assign(:page_title, "blog")
 
-      {:ok, socket}
+    {:ok, socket}
   end
 end
