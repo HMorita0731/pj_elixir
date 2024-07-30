@@ -1,0 +1,11 @@
+<.header>
+  Task <%= @task.id %>
+</.header>
+
+<.list>
+  <:item title="Title"><%= @task.title %></:item>
+  
+  <:item title="Date"><%= @task.date %></:item>
+</.list>
+
+<.back navigate={~p"/tasks"}>Back to tasks</.back>

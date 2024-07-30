@@ -54,44 +54,53 @@ defmodule BlogAppWeb.UserPageLive do
             class="flex justify-between pb-2 border-b last:border-none cursor-pointer"
           >
             <div :if={@live_action == :info}>
-              <.link href={~p"/users/profile/#{article.user_id}"}>
+              <.link href={~p"/users/profile/#{article.user_id}"}
+              class ="hover:underline"
+              >
                 <%= article.user.name %>
               </.link>
 
-              <.link href={~p"/articles/show/#{article}"}>
+              <.link href={~p"/articles/show/#{article}"}
+              class = "text-xs text-gray-600">
                 <div><%= article.submit_date %></div>
 
-                <h2><%= article.title %></h2>
+                <h2 class = "text-2xl font-bold my-2 hover:underline"><%= article.title %></h2>
               </.link>
             </div>
 
             <.link :if={@live_action == :draft} href={~p"/articles/#{article}/edit"}>
-              <div><%= article.title %></div>
+              <div
+              class = "text-2xl font-bold my-2t hover:underline"
+              ><%= article.title %></div>
 
               <div :if={article.body} class="trunscate">
                 <%= article.body %>
               </div>
             </.link>
 
-            <%= if @live_action in [:info,:draft] do %>
+            <div :if={@live_action in [:info,:draft]}
+            class ="relative">
               <div
                 :if={@user.id == @current_user_id}
                 phx-click="set_article_id"
                 phx-value-article_id={article.id}
+                class="border rounded w-min px-1 mt-2 border-gray-400"
               >
                 ...
               </div>
 
-              <div :if={article.id == @set_article_id}>
+              <div :if={article.id == @set_article_id}
+              class="absolute right-0 border rounded_lg borader_gray300 mt-2 p-2">
                 <.link href={~p"/articles/#{article}/edit"}>Edit</.link>
-                <span phx-click="delete_article" phx-value-article_id={article.id}>
+                <span phx-click="delete_article" phx-value-article_id={article.id}
+                class="#border-b block px2">
                   Delete
                 </span>
               </div>
-            <% end %>
+            </div>
           </div>
         <% else %>
-          <div>
+          <div class="text-xl font-bold mt-2">
             <%= case @live_action do
               :info -> "No articles."
               :draft -> "No draft articles."

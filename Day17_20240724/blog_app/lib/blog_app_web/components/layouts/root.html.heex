@@ -12,35 +12,37 @@
     </script>
   </head>
   <body class="bg-white">
-    <ul class="relative z-10 flex items-center gap-4 px-4 sm:px-6 lg:px-8 justify-end">
+    <ul class="relative z-10 flex items-center gap-4 px-4 sm:px-6 lg:px-8 justify-between mt-2 ">
+      <li class="font-extrabold hover:underline">
+      <.link href={~p"/"}>Home</.link>
+      </li>
+      <div class="flex gap-4 items-center justify-end">
       <%= if @current_user do %>
-        <li class="text-[0.8125rem] leading-6 text-zinc-900">
+        <li class="text-[0.8125rem] leading-6 text-zinc-900 hover:underline">
           <.link href={~p"/users/profile/#{@current_user}"}>
             <%= @current_user.email %>
           </.link>
         </li>
         <li>
           <.link
-            href={~p"/users/settings"}
-            class="text-[0.8125rem] leading-6 text-zinc-900 font-semibold hover:text-zinc-700"
-          >
-            Settings
-          </.link>
-        </li>
-        <li>
-          <.link
             href={~p"/users/log_out"}
             method="delete"
-            class="text-[0.8125rem] leading-6 text-zinc-900 font-semibold hover:text-zinc-700"
+            class="text-[0.8125rem] leading-6 text-zinc-900 font-semibold hover:text-zinc-700 hover:underline"
           >
             Log out
           </.link>
+        </li>
+        <li>
+        <.link href={~p"/articles/new"}
+        class="bg-gray-200 rounded-lg px-8 py-2 hover:bg-gray-400 font-semibold block hover:underline">
+        Post
+        </.link>
         </li>
       <% else %>
         <li>
           <.link
             href={~p"/users/register"}
-            class="text-[0.8125rem] leading-6 text-zinc-900 font-semibold hover:text-zinc-700"
+            class="text-[0.8125rem] leading-6 text-zinc-900 font-semibold hover:text-zinc-700 hover:underline"
           >
             Register
           </.link>
@@ -48,12 +50,13 @@
         <li>
           <.link
             href={~p"/users/log_in"}
-            class="text-[0.8125rem] leading-6 text-zinc-900 font-semibold hover:text-zinc-700"
+            class="text-[0.8125rem] leading-6 text-zinc-900 font-semibold hover:text-zinc-700 hover:underline"
           >
             Log in
           </.link>
         </li>
       <% end %>
+      </div>
     </ul>
     <%= @inner_content %>
   </body>
